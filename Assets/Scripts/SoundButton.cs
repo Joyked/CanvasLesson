@@ -1,20 +1,18 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
 public class SoundButton : MonoBehaviour
 {
-    public event Action ButtonPressed;
-
     private Button _button;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(HandlePressing);
+        _audioSource = GetComponent<AudioSource>();
+        _button.onClick.AddListener(Play);
     }
 
-    private void HandlePressing() =>
-        ButtonPressed?.Invoke();
+    private void Play() =>
+        _audioSource.Play();
 }

@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class SliderEvent : MonoBehaviour
 {
-    public event Action<float> ChangedReadings; 
-    
     private Slider _slider;
+    
+    public event Action<float> ChangedReadings; 
 
     private void Awake()
     {
