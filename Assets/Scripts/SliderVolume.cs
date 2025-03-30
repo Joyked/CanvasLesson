@@ -2,17 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderEvent : MonoBehaviour
+public class SliderVolume : MonoBehaviour
 {
-    private Slider _slider;
+    [SerializeField] private Slider _slider;
     
     public event Action<float> ChangedReadings; 
 
-    private void Awake()
-    {
-        _slider = GetComponentInChildren<Slider>();
+    private void OnEnable() =>
         _slider.onValueChanged.AddListener(ChangeVolume);
-    }
+
+    private void OnDisable() =>
+        _slider.onValueChanged.RemoveListener(ChangeVolume);
 
     private void ChangeVolume(float value) =>
         ChangedReadings?.Invoke(value);

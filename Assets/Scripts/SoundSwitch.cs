@@ -10,13 +10,13 @@ public class SoundSwitch : MonoBehaviour
     public event Action SwitchIsPressed;
     public event Action SwitchDontPressed;
 
-    private void Awake()
-    {
+    private void Awake() =>
         _button = GetComponent<Button>();
-        _button.onClick.AddListener(ToggleMusic);
-    }
 
-    private void OnDestroy() =>
+    private void OnEnable() =>
+        _button.onClick.AddListener(ToggleMusic);
+
+    private void OnDisable() =>
         _button.onClick.RemoveListener(ToggleMusic);
 
     private void ToggleMusic()

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Button))]
+[RequireComponent(typeof(AudioSource))]
 public class SoundButton : MonoBehaviour
 {
     private Button _button;
@@ -10,8 +12,13 @@ public class SoundButton : MonoBehaviour
     {
         _button = GetComponent<Button>();
         _audioSource = GetComponent<AudioSource>();
-        _button.onClick.AddListener(Play);
     }
+
+    private void OnEnable() =>
+        _button.onClick.AddListener(Play);
+
+    private void OnDisable() =>
+        _button.onClick.RemoveListener(Play);
 
     private void Play() =>
         _audioSource.Play();
